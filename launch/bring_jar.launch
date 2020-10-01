@@ -1,4 +1,6 @@
 <launch>
+	<param name="/kb_places_xml" type="string" value="$(find velma_bring_jar)/map/places.xml" />
+
 	<!-- launch velma simulation -->
 	<include file="$(find velmobil_navigation)/launch/velmobil_navigation.launch" />
 
