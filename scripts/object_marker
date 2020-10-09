@@ -46,12 +46,16 @@ class Publisher:
 			t.child_frame_id = self.frame_id
 			correction_x = 0
 			correction_y = 0
-			if self.frame_id == "object":
-				correction_y = 0.03
-				correction_x = -0.04
+			correction_z = 0
+			# if self.frame_id == "object":
+			# 	correction_x = -0.04
+			# 	correction_y = 0.03
+			if self.frame_id == "szafka_above":
+				correction_z = 0.4
+				correction_x = -0.1
 			t.transform.translation.x = res.link_state.pose.position.x + correction_x
 			t.transform.translation.y = res.link_state.pose.position.y + correction_y
-			t.transform.translation.z = res.link_state.pose.position.z
+			t.transform.translation.z = res.link_state.pose.position.z + correction_z
 			t.transform.rotation = res.link_state.pose.orientation
 			self.broadcaster.sendTransform(t)
 
@@ -68,13 +72,13 @@ if __name__ == "__main__":
 	rospy.init_node("object_marker", anonymous=True)
 
 	tableThread = threading.Thread(target=thread_fun, args=("cafe_table::link", "stolik", "map"))
-	cabinetThread = threading.Thread(target=thread_fun, args=("cabinet_door::right_door", "szafka", "map"))
+	cabinetDoorThread = threading.Thread(target=thread_fun, args=("cabinet_door::right_door", "szafka", "map"))
+	cabinetThread = threading.Thread(target=thread_fun, args=("cabinet_door::cabinet", "szafka_above", "map"))
 	objectThread = threading.Thread(target=thread_fun, args=("beer::link", "object", "map"))
 
 	tableThread.start()
 	cabinetThread.start()
 	objectThread.start()
-
+	cabinetDoorThread.start()
 	print("Publishing position of test objects")
-
 	rospy.spin()
