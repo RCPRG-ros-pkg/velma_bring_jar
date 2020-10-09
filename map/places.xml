@@ -10,6 +10,8 @@
         <point_place id="help_to_open" name="help_to_open" position="3.45 -0.3" front_vec="1 0" face_place="false"/>
         <point_place id="kuchnia" name="kuchnia" position="-1 0" front_vec="1 0" face_place="false"/>
         <point_place id="fotel" name="fotel" position="1 1" front_vec="1 0" face_place="true"/>
+        <point_place id="John" name="John" position="1 1" front_vec="1 0" face_place="true"/>
+        <point_place id="Rico" name="Rico" position="0 0" front_vec="1 0" face_place="false"/>
     </map_context>
 
 </places>

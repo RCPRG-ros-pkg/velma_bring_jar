@@ -2,13 +2,26 @@
 
 import rospy
 import tiago_msgs.msg
+import sys
 
 if __name__ == "__main__":
 	rospy.init_node("bring_jar_requester", anonymous=True)
 	pub_cmd = rospy.Publisher( '/rico_cmd', tiago_msgs.msg.Command, queue_size=10 )
 	cmd = tiago_msgs.msg.Command()
-	cmd.intent_name = 'BJ'
-	cmd.param_names= ['object_container','bring_destination','end_pose']
-	cmd.param_values= ['szafka','stolik','init']
+	intent = None
+	if len(sys.argv) > 1:
+		intent = sys.argv[1]
+	if intent == 'BJ':
+		cmd.intent_name = 'BJ'
+		cmd.param_names= ['object_container','bring_destination','end_pose']
+		cmd.param_values= ['szafka','stolik','init']
+	elif intent == 'HF':
+		cmd.intent_name = 'HF'
+		cmd.param_names= ['human_name']
+		cmd.param_values= ['John']
+	else:
+		cmd.intent_name = 'BJ'
+		cmd.param_names= ['object_container','bring_destination','end_pose']
+		cmd.param_values= ['szafka','stolik','init']
 	rospy.sleep(1)
 	pub_cmd.publish(cmd)
