@@ -1,0 +1,15 @@
+<launch>
+	<param name="/kb_places_xml" type="string" value="$(find velma_bring_jar)/map/places.xml" />
+	<arg name="harmonizer_name" default="velma_task_harmonizer"/>
+	<!-- launch velma simulation -->
+	<include file="$(find velmobil_navigation)/launch/velmobil_navigation.launch" />
+
+	<!-- run tf broadcaster of objects: stolik, szafka, jar -->
+	<node name="object_marker_broadcaster" pkg="velma_bring_jar" type="object_marker"/>
+
+	<!-- run configured rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find velma_bring_jar)/rviz/bring_jar.rviz"/>
+	<!-- run configured rviz -->
+	<param name="harmonizer_name" type="string" value="$(arg harmonizer_name)" />
+	<node name="$(arg harmonizer_name)" pkg="TaskER" type="task_harmonizer"/>
+</launch>
