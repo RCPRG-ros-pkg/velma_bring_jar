@@ -1,8 +1,14 @@
 <launch>
 	<param name="/kb_places_xml" type="string" value="$(find velma_bring_jar)/map/places.xml" />
 
+	<arg name='fake_amcl'/>
 	<!-- launch velma simulation -->
-	<include file="$(find velmobil_navigation)/launch/velmobil_navigation.launch" />
+	<group if="$(arg fake_amcl)">
+		<include file="$(find velmobil_navigation)/launch/velmobil_navigation_fake_localization.launch" />
+	</group>
+	<group unless="$(arg fake_amcl)">
+		<include file="$(find velmobil_navigation)/launch/velmobil_navigation.launch" />
+	</group>
 
 	<!-- run tf broadcaster of objects: stolik, szafka, jar -->
 	<node name="object_marker_broadcaster" pkg="velma_bring_jar" type="object_marker"/>

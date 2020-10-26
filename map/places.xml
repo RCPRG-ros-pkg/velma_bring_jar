@@ -3,7 +3,7 @@
     <map_context name="sim" map_param_filename="simple_test_map.yaml" map_filename="simple_test_map.pgm" >
         <volumetric_mask filename="img/places_mask.png" />
 
-        <point_place id="szafka" name="szafka" position="3.35 -0.15" front_vec="1 0" face_place="false"/>
+        <point_place id="szafka" name="szafka" position="3.5 -0.35" front_vec="1 0" face_place="false"/>
         <point_place id="stolik" name="stolik" position="0.6354 1.922" front_vec="-1 0" face_place="false"/>
         <point_place id="init" name="init" position="0 0" front_vec="1 0" face_place="false"/>
         <point_place id="take_out_pose" name="take_out_pose" position="3.45 0.35" front_vec="1 0" face_place="false"/>
